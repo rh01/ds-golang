@@ -1,9 +1,9 @@
 package arraryqueue
 
 type ArraryQueue struct {
-	elements []int
-	first    int
-	last     int
+	Elements []int
+	First    int
+	Last     int
 } // size 表示当前队列的大小，出队列在数组的最后一个元素
 
 func New(initSize int) *ArraryQueue {
@@ -11,40 +11,45 @@ func New(initSize int) *ArraryQueue {
 		return nil
 	}
 	return &ArraryQueue{
-		elements: make([]int, initSize),
-		first:    0,
-		last:     0, // 队尾
+		Elements: make([]int, initSize),
+		First:    0,
+		Last:     0, // 队尾
 	}
 }
 
 // 查看
-func (aq *ArraryQueue) peek() int {
-	if aq.first < 0 {
+func (aq *ArraryQueue) Peek() int {
+	if aq.First < 0 {
 		return -1
 	}
-	return aq.elements[aq.first]
+	return aq.Elements[aq.First]
 }
 
 // 入队
-func (aq *ArraryQueue) enqueue(data int) bool {
-	if aq.last == len(aq.elements)-1 {
+func (aq *ArraryQueue) Enqueue(data int) bool {
+	if aq.Last == len(aq.Elements)-1 {
 		return false
 	}
-	aq.elements[aq.last] = data
-	aq.last++
+	aq.Elements[aq.Last] = data
+	aq.Last++
 	return true
 }
 
 // 出队
-func (aq *ArraryQueue) dequeue() (int, bool) {
-	if aq.first == aq.last && aq.first == len(aq.elements) {
-		return -1, false
+func (aq *ArraryQueue) Dequeue() int {
+	if aq.First == aq.Last && aq.First == len(aq.Elements) {
+		return -1
 	}
-	data := aq.elements[aq.first]
-	aq.first++
-	return data, true
+	data := aq.Elements[aq.First]
+	aq.First++
+	return data
 }
 
-func (aq *ArraryQueue) len() int {
-	return aq.last - aq.first
+func (aq *ArraryQueue) Len() int {
+	return aq.Last - aq.First
+}
+
+
+func (aq *ArraryQueue) IsEmpty() bool {
+	return aq.Last - aq.First == 0
 }
