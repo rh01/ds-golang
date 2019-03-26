@@ -4,6 +4,7 @@ import "math/rand"
 
 func RandomQuickSort(array []int, L, R int) {
 	if L < R {
+		swap(array, int(rand.New(rand.NewSource(1024)).Float64())*(R-L+1), R)
 		var p = partition(array, L, R)
 		RandomQuickSort(array, L, p[0]-1)
 		RandomQuickSort(array, p[1]+1, R)
@@ -15,9 +16,9 @@ func partition(arr []int, L, R int) []int {
 	less := L - 1
 	more := R
 	current := L
-	random := rand.New(rand.NewSource(1024))
-	index := random.Intn(R-L) + L + 1
-	swap(arr, index, R)
+	// random := rand.New(rand.NewSource(1024))
+	// index := random.Intn(R-L) + L + 1
+	// swap(arr, index, R)
 	for current < more {
 		if arr[current] < arr[R] {
 			less++
