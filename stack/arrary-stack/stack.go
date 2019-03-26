@@ -1,8 +1,8 @@
 package arrarystack
 
 type Stack struct {
-	elements []int
-	size     int	// size-1 为栈顶，入栈时先存入，size再加一, 栈顶一般指向下一个元素
+	Elements []int
+	Size     int	// size-1 为栈顶，入栈时先存入，size再加一, 栈顶一般指向下一个元素
 }
 
 func New(initSize int) *Stack {
@@ -10,36 +10,40 @@ func New(initSize int) *Stack {
 		return nil
 	}
 	return &Stack{
-		elements: make([]int, initSize),
-		size:     0,
+		Elements: make([]int, initSize),
+		Size:     0,
 	}
 }
 
-func (s *Stack) peek() int {
-	if s.size == 0 {
+func (s *Stack) Peek() int {
+	if s.Size == 0 {
 		return -1
 	}
-	return s.elements[s.size-1]
+	return s.Elements[s.Size-1]
 }
 
-func (s *Stack) push(data int)  bool {
-	if s.size == len(s.elements){
+func (s *Stack) Push(data int)  bool {
+	if s.Size == len(s.Elements){
 		return false
 	}
-	s.elements[s.size] = data
-	s.size ++
+	s.Elements[s.Size] = data
+	s.Size ++
 	return true
 }
 
-func (s *Stack) pop() (int, bool) {
-	if s.size < 1 {
+func (s *Stack) Pop() (int, bool) {
+	if s.Size < 1 {
 		return -1, false
 	}
-	s.size --
-	poped := s.elements[s.size]
+	s.Size --
+	poped := s.Elements[s.Size]
 	return poped, true
 }
 
-func (s *Stack) len() int {
-	return s.size
+func (s *Stack) Len() int {
+	return s.Size
+}
+
+func (s *Stack) IsEmpty() bool {
+	return s.Size == 0
 }
